@@ -94,3 +94,17 @@ objects = """ problems of phonemic and morphological analysis.
     the requirement that branching is not tolerated within the dominance scope of a complex symbol.
     the strong generative capacity of the theory."""
 # List of OBJECTs selected for profound sententiousness.
+
+import textwrap, random
+from itertools import chain, islice, izip
+
+def chomsky(times=1, line_length=72):
+    parts = []
+    for part in (leadins, subjects, verbs, objects):
+        phraselist = map(str.strip, part.splitlines())
+        random.shuffle(phraselist)
+        parts.append(phraselist)
+    output = chain(*islice(izip(*parts), 0, times))
+    return textwrap.fill(' '.join(output), line_length)
+
+print chomsky(5)
